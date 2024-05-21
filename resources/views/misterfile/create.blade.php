@@ -10,13 +10,14 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="{{route('masterfile.store')}}">
+                    @csrf
                   <div class="card-body">
                    <div class="row">
                     <div class="col-8">
                         <div class="form-group">
                             <label for="misterfile">Subject</label>
-                            <input type="email" class="form-control" id="misterfile" placeholder="Enter Subject">
+                            <input type="text" name="name" class="form-control" id="misterfile" placeholder="Enter Subject">
                           </div>
                     </div>
                     <div class="col-4">

@@ -22,21 +22,20 @@
                                 <div class="user-block">
                                   <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
                                   <span class="username">
-                                    <a href="#">Jonathan Burke Jr.</a>
+                                    <span >{{$File->initiatedbysection->name}}</span>
                                     <div class="float-right">
-                                        <a href="#" class="float-right "><span  class="badge p-2 bg-danger ">Active</span></a>
+                                        <a href="#" class="float-right "><span  class="badge p-2 bg-success ">{{$File->date}}</span></a>
                                     </div>
 
                                   </span>
-                                  <span class="description">Shared publicly - 7:30 PM today</span>
+{{--
+                                  <span class="mx-3"></span>
+                                  <hr> --}}
+                                  <span class="description"><strong>Subject : </strong> {{$File->subject}} </span>
                                 </div>
                                 <!-- /.user-block -->
                                 <p>
-                                  Lorem ipsum represents a long-held tradition for designers,
-                                  typographers and the like. Some people hate it and argue for
-                                  its demise, but others ignore the hate as they create awesome
-                                  tools to help create filler text for everyone from bacon lovers
-                                  to Charlie Sheen fans.
+                                {!! $File->content !!}
                                 </p>
 
                               </div>
@@ -53,9 +52,9 @@
                                 <div class="form-group">
                                     <select class="form-control" aria-label="Default select example">
                                         <option selected disabled>Select Deparment</option>
-                                        <option value="1">Section 1</option>
-                                        <option value="2">Section 2</option>
-                                        <option value="3">Section 3</option>
+                                        @foreach ($section as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
                                       </select>
                                 </div>
                             </div>

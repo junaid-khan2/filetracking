@@ -3,24 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MesterFile;
+use App\Models\File;
+use App\Models\FileLog;
+use App\Models\Section;
 
-class MisterFileController extends Controller
+class FileMovementController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('misterfile.index');
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        return view('misterfile.create');
+        $data['File'] =  File::with(['fileLog','attachment','initiatedbysection'])->where('id',$id)->first();
+        $data['section'] = Section::all();
+        return view('file.forword',$data);
     }
 
     /**
@@ -28,10 +32,7 @@ class MisterFileController extends Controller
      */
     public function store(Request $request)
     {
-        $mister = MesterFile::create([
-            'name'=>$request->name
-        ]);
-        return redirect()->route('masterfile.index');
+        //
     }
 
     /**

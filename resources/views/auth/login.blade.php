@@ -13,6 +13,14 @@
   <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <style>
+    .login-page{
+      background-image: url("{{asset('images/bg-img-1.jpg')}}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+</style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -22,7 +30,7 @@
       <a href="#" class="h1"><b>File</b>Tracking</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      {{-- <p class="login-box-msg">Sign in to start your session</p> --}}
 
       <form action="{{ route('login') }}" method="post">
         @csrf
@@ -75,9 +83,9 @@
       {{-- <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
       </p> --}}
-      <p class="mb-0">
+      {{-- <p class="mb-0">
         <a href="{{route('register')}}" class="text-center">Register a new membership</a>
-      </p>
+      </p> --}}
     </div>
     <!-- /.card-body -->
   </div>

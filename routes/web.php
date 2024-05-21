@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MisterFileController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FileMovementController;
 
 Route::get('/', function () {
     return  redirect()->route('dashboard');
@@ -18,10 +20,12 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     // mister File
-    Route::resource('/misterfile',MisterFileController::class);
-    Route::view('/file/create', 'file.create');
+    Route::resource('/masterfile',MisterFileController::class);
+    Route::get('/forword/create/{id}',[FileMovementController::class,'create'])->name('forword.create');
+    Route::resource('forword', FileMovementController::class)->except(['create']);
+
     Route::view('/intransit', 'intransit.index');
-    Route::view('/mydesk', 'mydesk.index');
+    Route::get('/mydesk', [FileController::class,'mydesk'])->name('mydesk');
     Route::view('/search', 'search.index');
     Route::view('/track', 'file.track');
     Route::view('/forword', 'file.forword');

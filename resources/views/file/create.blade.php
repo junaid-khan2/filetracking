@@ -14,7 +14,8 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form action="{{route('file.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
 
                     <fieldset class="border px-3">
@@ -24,41 +25,45 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">File Type</label>
-                                    <select class="form-control" aria-label="Default select example">
+                                    <select name="file_type" class="form-control" aria-label="Default select example">
                                         <option selected disabled>Select File Type</option>
-                                        <option value="1">File</option>
-                                        <option value="1">Letter</option>
-                                        <option value="1">Application</option>
-                                        <option value="1">Diary</option>
+                                        <option value="File">File</option>
+                                        <option value="Letter">Letter</option>
+                                        <option value="Application">Application</option>
+                                        <option value="Diary">Diary</option>
                                       </select>
                                   </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="input1">Mister File</label>
-                                    <select class="form-control" aria-label="Default select example">
-                                        <option selected disabled>Select Mister File</option>
-                                        <option value="1">Mister File Name</option>
+                                    <label for="input1">Master File</label>
+                                    <select name="master_file" class="form-control" aria-label="Default select example">
+                                        <option selected disabled>Select Master File</option>
+                                        @foreach ($masterfile as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
                                       </select>
                                   </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">Flag</label>
-                                    <select class="form-control" aria-label="Default select example">
+                                    <select name="flag" class="form-control" aria-label="Default select example">
                                         <option selected disabled>Select Flag</option>
-                                        <option value="1">Narmal</option>
-                                        <option value="2">Urgent</option>
-                                        <option value="3">Immediate</option>
+                                        <option value="Narmal">Narmal</option>
+                                        <option value="Urgent">Urgent</option>
+                                        <option value="Immediate">Immediate</option>
                                       </select>
                                   </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="input1">Category</label>
-                                    <select class="form-control" aria-label="Default select example">
-                                        <option selected disabled>Select Category</option>
-                                        <option value="1">Posting</option>
+                                    <label for="input1">Case Type</label>
+                                    <select name="case_type" class="form-control" aria-label="Default select example">
+                                        <option selected disabled>Select Case Type</option>
+                                        @foreach ($category as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
                                       </select>
                                   </div>
                             </div>
@@ -66,11 +71,11 @@
                                 <div class="form-group">
                                     <label>Source</label><br>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="priority" id="internal" value="internal">
+                                        <input class="form-check-input" type="radio" name="source" id="internal" value="internal">
                                         <label class="form-check-label" for="internal">Internal</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="priority" id="external" value="external">
+                                        <input class="form-check-input" type="radio" name="source" id="external" value="external">
                                         <label class="form-check-label" for="external">External</label>
                                     </div>
                                 </div>
@@ -83,18 +88,18 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">To Section</label>
-                                    <select class="form-control" aria-label="Default select example">
+                                    <select name="to_section" class="form-control" aria-label="Default select example">
                                         <option selected disabled>Select Deparment</option>
-                                        <option value="1">Section 1</option>
-                                        <option value="2">Section 2</option>
-                                        <option value="3">Section 3</option>
+                                        @foreach ($section as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
                                       </select>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">Received Date</label>
-                                    <input type="datetime-local" class="form-control" name="" id="">
+                                    <input type="date" class="form-control" name="date" id="">
                                 </div>
                             </div>
 
@@ -110,13 +115,13 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <textarea id="summernote">
+                                <textarea name="content" id="summernote">
 
                                 </textarea>
                             </div>
                             <div class="form-group">
                                 <label for="input1">Attachment</label>
-                                <input type="file" class="form-control" name="" id="">
+                                <input type="file" class="form-control" name="attachment[]" multiple id="">
                             </div>
                         </div>
                     </fieldset>
