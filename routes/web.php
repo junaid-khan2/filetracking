@@ -11,7 +11,9 @@ Route::get('/', function () {
     return  redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::get('/report', [DashboardController::class,'report'])->name('report');
+Route::get('/report/section/{section}/{type}', [DashboardController::class,'reportSetionType'])->name('report.section');
 
 
 

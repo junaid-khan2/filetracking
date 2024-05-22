@@ -32,7 +32,7 @@
                     <tbody>
                         @foreach ($File as $item)
                         <tr>
-                            
+
                             <td>{{$item->misterFile->name}}</td>
                             <td>{{$item->subject}}</td>
                             <td>{{$item->track_number}}</td>
@@ -84,6 +84,7 @@
         "lengthChange": false,
         "searching": true,
         "ordering": true,
+         "order": [[1, 'desc'], [0, 'desc']],
         "info": true,
         "autoWidth": false,
         "responsive": true,

@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <style>
     .login-page{
-      background-image: url("{{asset('images/bg-img-1.jpg')}}");
+      background-image: url("{{asset('images/FTS-bg.png')}}");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;

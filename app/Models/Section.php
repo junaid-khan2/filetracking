@@ -17,4 +17,9 @@ class Section extends Model
     public function files(){
         return $this->hasMany(File::class,'current_section','id');
     }
+
+    public function created_files()
+    {
+        return $this->hasMany(File::class, 'created_section', 'id');
+    }
 }

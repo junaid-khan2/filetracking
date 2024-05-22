@@ -51,7 +51,7 @@
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             My Desk
-                      
+
                         </p>
                     </a>
                     {{-- <ul class="nav nav-treeview">
@@ -62,7 +62,7 @@
                                 <span class="right badge badge-danger">{{$fileCount['intransit']}}</span>
                             </a>
                         </li>
-                       
+
 
                     </ul> --}}
 
@@ -114,10 +114,10 @@
                                 <span class="right badge badge-danger">{{$fileCount['disposed']}}</span>
                             </a>
                         </li>
-                      
+
                     </ul>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
@@ -140,7 +140,7 @@
                         </li>
 
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
@@ -150,28 +150,28 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ url('search') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Advance Search</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
+                            <a href="{{route('report')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Report</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="pages/charts/inline.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>My Setting</p>
                             </a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>

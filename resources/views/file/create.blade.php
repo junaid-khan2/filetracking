@@ -34,7 +34,7 @@
                                       </select>
                                   </div>
                             </div>
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">Master File</label>
                                     <select name="master_file" class="form-control" aria-label="Default select example">
@@ -44,7 +44,7 @@
                                         @endforeach
                                       </select>
                                   </div>
-                            </div>
+                            </div> --}}
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">Flag</label>

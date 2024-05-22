@@ -18,7 +18,7 @@ class FileController extends Controller
      */
     public function index()
     {
-          
+
         $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->get();
         $data['created'] = FileLog::where('created_by',Auth::user()->id)->count() ?? 0;
         $data['disposed'] = File::where('current_section',Auth::user()->section)->where('status','Dispost')->count();
@@ -29,7 +29,7 @@ class FileController extends Controller
     }
     public function mydesk()
     {
-         
+
         $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->get();
         $data['created'] = FileLog::where('created_by',Auth::user()->id)->count() ?? 0;
         $data['disposed'] = File::where('current_section',Auth::user()->section)->where('status','Dispost')->count();
@@ -82,15 +82,15 @@ class FileController extends Controller
     public function store(Request $request)
     {
 
-        $section = Section::where('id',Auth::user()->section)->first();
+        $section = Section::where('id',$request->to_section)->first();
         $id = File::latest()->first()->id + 1 ?? 0;
         $prefix = $section->code.'-'.$id;
-        $track_number = $section->code.'-' . date('Y-m') . '-' .$id;
+        $track_number = $section->code.'-' . date('Y-m') . '-'.$id ;
 
         $files = File::create([
             'created_by'=>Auth::user()->id,
             'created_section'=>Auth::user()->section,
-            'mester_file_id'=>$request->master_file,
+            'mester_file_id'=>1,
             'prefix'=> $prefix,
             'track_number'=>$track_number,
             'flag'=>$request->flag,
