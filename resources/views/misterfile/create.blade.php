@@ -1,4 +1,4 @@
-@extends('layouts.app',['page_title'=>'Mister File'])
+@extends('layouts.app',['page_title'=>'Master File'])
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -6,7 +6,7 @@
             <div class="col-md-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Mister File</h3>
+                  <h3 class="card-title">Master File</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -16,8 +16,8 @@
                    <div class="row">
                     <div class="col-8">
                         <div class="form-group">
-                            <label for="misterfile">Subject</label>
-                            <input type="text" name="name" class="form-control" id="misterfile" placeholder="Enter Subject">
+                            <label for="Masterfile">Subject</label>
+                            <input type="text" name="name" class="form-control" id="Masterfile" placeholder="Enter Subject">
                           </div>
                     </div>
                     <div class="col-4">

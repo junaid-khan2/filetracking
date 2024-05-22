@@ -1,10 +1,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    {{-- <a href="index3.html" class="brand-link">
         <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="File Tracking Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">File Tracking</span>
-    </a>
+    </a> --}}
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -47,30 +47,24 @@
 
                 </li>
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ url('mydesk') }}" class="nav-link active">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Dashboard
-                            <span class="right badge badge-danger">0</span>
+                            My Desk
+                      
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    {{-- <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ url('mydesk') }}" class="nav-link active">
                                 <i class="fa fa-solid fa-file-import"></i>
                                 <p>My Desk</p>
-                                <span class="right badge badge-danger">0</span>
+                                <span class="right badge badge-danger">{{$fileCount['intransit']}}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('intransit') }}" class="nav-link active">
-                                <i class="fa fa-solid fa-file-import"></i>
-                                <p>In Transit</p>
-                                <span class="right badge badge-danger">0</span>
-                            </a>
-                        </li>
+                       
 
-                    </ul>
+                    </ul> --}}
 
                 </li>
                 {{-- <li class="nav-item">
@@ -92,27 +86,46 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('myfile.intransit') }}" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>In Transit</p>
+                                <span class="right badge badge-warning">{{$fileCount['intransit']}}</span>
+                            </a>
+                        </li>
                         <li class="nav-item ">
-                            <a href="{{ url('mydesk') }}" class="nav-link">
+                            <a href="{{ route('myfile.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Created</p>
-                                <span class="right badge badge-info">0</span>
+                                <span class="right badge badge-info">{{$fileCount['created']}}</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('myfile.inprocess') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>In Process</p>
-                                <span class="right badge badge-success">0</span>
+                                <span class="right badge badge-success">{{$fileCount['inprocess']}}</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('myfile.disposed') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Disposed</p>
-                                <span class="right badge badge-danger">0</span>
+                                <span class="right badge badge-danger">{{$fileCount['disposed']}}</span>
                             </a>
                         </li>
+                      
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                           Master File
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('masterfile.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -125,6 +138,7 @@
                                 <p>Create Master File</p>
                             </a>
                         </li>
+
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -157,7 +171,24 @@
 
                     </ul>
                 </li>
-
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                           Profile
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>LogOut</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </nav>

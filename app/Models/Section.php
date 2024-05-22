@@ -13,4 +13,8 @@ class Section extends Model
         'name',
         'code'
     ] ;
+
+    public function files(){
+        return $this->hasMany(File::class,'current_section','id');
+    }
 }

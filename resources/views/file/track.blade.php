@@ -81,68 +81,69 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body">
-                          <!-- Post -->
-                      <div class="post">
-                        <div class="user-block">
-                          <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                          <span class="username">
-                            <a href="#">Jonathan Burke Jr.</a>
-                            <div class="float-right">
-                                <a href="#" class="float-right "><span  class="badge p-2 bg-danger ">Active</span></a>
-                            </div>
+                  <div class="card-body">
+                    <!-- Post -->
+                    <div class="post">
+                      <div class="user-block">
+                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                        <span class="username">
+                          <span >{{$File->initiatedbysection->name}}</span>
+                          <div class="float-right">
+                              <a href="#" class="float-right "><span  class="badge p-2 bg-success ">{{$File->status}}</span></a>
+                          </div>
 
-                          </span>
-                          <span class="description">Shared publicly - 7:30 PM today</span>
-                        </div>
-                        <!-- /.user-block -->
-                        <p>
-                          Lorem ipsum represents a long-held tradition for designers,
-                          typographers and the like. Some people hate it and argue for
-                          its demise, but others ignore the hate as they create awesome
-                          tools to help create filler text for everyone from bacon lovers
-                          to Charlie Sheen fans.
-                        </p>
+                        </span>
+                        {{--
+                        <span class="mx-3"></span>
+                        <hr> --}}
+                        <span class="description"><strong>Subject : </strong> {{$File->subject}} </span>
+                      </div>
+                      <!-- /.user-block -->
+                      <p>
+                      {!! $File->content !!}
+                      </p>
 
-                      </div>
-                      <div class="timeline-body">
-                        <img src="https://placehold.it/150x100" alt="...">
-                        <img src="https://placehold.it/150x100" alt="...">
-                        <img src="https://placehold.it/150x100" alt="...">
-                        <img src="https://placehold.it/150x100" alt="...">
-                      </div>
-                      <!-- /.post -->
                     </div>
+                    <div class="timeline-footer">
+                      @foreach ($File->attachment as $item)
+                      <a  href="{{asset($item->path.$item->source)}}" target="_blank" class="btn btn-primary btn-sm">{{$item->source}} <i class="fa fa-download"></i></a>
+                      @endforeach
+                     
+                      {{-- <a class="btn btn-primary btn-sm">Attachment2</a>
+                      <a class="btn btn-primary btn-sm">Attachment3</a> --}}
+                    </div>
+
+                    <!-- /.post -->
+                  </div>
                 </div>
             </div>
             <div class="col-md-12">
               <!-- The time line -->
               <div class="timeline">
                 <!-- timeline time label -->
-                <div class="time-label">
-                  <span class="bg-red">10 Feb. 2014</span>
-                </div>
+           
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
+                @foreach ($FileLog as $item)
                 <div>
                   <i class="fas fa-envelope bg-blue"></i>
                   <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                 
+                    <span class="time">{{$item->date}} <i class="fas fa-clock"></i></span>
+                    <h3 class="timeline-header">{{$item->from->name}} To {{$item->to->name}}</h3>
 
                     <div class="timeline-body">
-                      Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                      weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                      jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                      quora plaxo ideeli hulu weebly balihoo...
+                     {!! $item->content !!}
                     </div>
                     <div class="timeline-footer">
-                      <a class="btn btn-primary btn-sm">Attachment1</a>
-                      <a class="btn btn-primary btn-sm">Attachment2</a>
-                      <a class="btn btn-primary btn-sm">Attachment3</a>
+                      @foreach ($item->attachment as $item1)
+                      <a  href="{{asset($item1->path.$item1->source)}}" target="_blank" class="btn btn-primary btn-sm">{{$item1->source}} <i class="fa fa-download"></i></a>
+                      @endforeach
                     </div>
                   </div>
-                </div>
+                </div>   
+                @endforeach
+              
                 <!-- END timeline item -->
 
                 <div>

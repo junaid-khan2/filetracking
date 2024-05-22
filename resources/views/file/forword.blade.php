@@ -31,7 +31,7 @@
                                     </div>
 
                                   </span>
-{{--
+                                  {{--
                                   <span class="mx-3"></span>
                                   <hr> --}}
                                   <span class="description"><strong>Subject : </strong> {{$File->subject}} </span>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="input1">Attachment</label>
-                                <input type="file" class="form-control" name="attachment" id="">
+                                <input type="file" class="form-control" name="attachment[]" multiple id="">
                             </div>
                         </div>
                     </fieldset>

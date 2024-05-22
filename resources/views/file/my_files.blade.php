@@ -1,4 +1,4 @@
-@extends('layouts.app',['page_title'=>'My Desk'])
+@extends('layouts.app',['page_title'=>$pate_title])
 @push('style')
  <!-- DataTables -->
  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -7,74 +7,7 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-    <!-- Small boxes (Stat box) -->
-    <div class="row">
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-info">
-              <div class="inner">
-              <h3>{{$created ?? 0}}</h3>
 
-              <p>Created</p>
-              </div>
-              <div class="icon">
-              <i class="ion ion-bag"></i>
-              </div>
-              <a href="{{route('myfile.create')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-              <div class="inner">
-              <h3>{{$intransit ?? 0}}</h3>
-
-              <p>In Transit</p>
-              </div>
-              <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="{{route('myfile.intransit')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-      
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-              <div class="inner">
-              <h3>{{$inprocess ?? 0}}</h3>
-
-              <p>In Process</p>
-              </div>
-              <div class="icon">
-              <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{{route('myfile.inprocess')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-       
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-              <div class="inner">
-              <h3>{{$disposed ?? 0}}</h3>
-  
-              <p>Completed</p>
-              </div>
-              <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="{{route('myfile.disposed')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-
-    </div>
-    <!-- /.row -->
     </div>
         <div class="row">
             <div class="col-12">
@@ -86,7 +19,6 @@
                     <thead>
 
                     <tr>
-                      <th data-orderable="false">Action</th>
                       <th>Mester File</th>
                       <th>Subject</th>
                       <th>Bar Code</th>
@@ -100,20 +32,7 @@
                     <tbody>
                         @foreach ($File as $item)
                         <tr>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary">Action</button>
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('track.show',$item->id)}}"><i class="fa fa-search"></i> Track</a>
-                                      <a class="dropdown-item" href="{{route('forword.create',$item->id)}}"><i class="fa fa-angle-right"></i> Forword To</a>
-                                      <a class="dropdown-item" href="{{route('forword.inprocess',$item->id)}}"><i class="fa fa-tasks"></i> In Process</a>
-                                      <a class="dropdown-item" href="{{route('forword.desposed',$item->id)}}"><i class="fa fa-trash"></i> Desposed</a>
-                                    </div>
-                                  </div>
-                            </td>
+                            
                             <td>{{$item->misterFile->name}}</td>
                             <td>{{$item->subject}}</td>
                             <td>{{$item->track_number}}</td>

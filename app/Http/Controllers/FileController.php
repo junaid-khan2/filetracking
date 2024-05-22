@@ -18,19 +18,51 @@ class FileController extends Controller
      */
     public function index()
     {
-        $data['File'] =  File::all();
-        return $data;
-        return view('mydesk.index');
+          
+        $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->get();
+        $data['created'] = FileLog::where('created_by',Auth::user()->id)->count() ?? 0;
+        $data['disposed'] = File::where('current_section',Auth::user()->section)->where('status','Dispost')->count();
+        $data['inprocess'] = File::where('current_section',Auth::user()->section)->where('status','In Process')->count();
+        $data['intransit'] = File::where('current_section',Auth::user()->section)->where('status','In Transit')->count();
+        // return $data;
+        return view('mydesk.index',$data);
     }
     public function mydesk()
     {
-        $data['File'] =  File::with(['misterFile','fileLog','attachment'])->get();
-        $data['created'] = FileLog::where('created_by',Auth::user()->id)->count();
-        $data['disposed'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','Dispost')->count();
-        $data['inprocess'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','In Process')->count();
-        $data['intransit'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','In Transit')->count();
+         
+        $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->get();
+        $data['created'] = FileLog::where('created_by',Auth::user()->id)->count() ?? 0;
+        $data['disposed'] = File::where('current_section',Auth::user()->section)->where('status','Dispost')->count();
+        $data['inprocess'] = File::where('current_section',Auth::user()->section)->where('status','In Process')->count();
+        $data['intransit'] = File::where('current_section',Auth::user()->section)->where('status','In Transit')->count();
         // return $data;
         return view('mydesk.index',$data);
+    }
+
+    public function createlist(){
+        $data['pate_title'] = "Created Files";
+         $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('created_by',Auth::user()->id)->latest()->get();
+
+        return view('file.my_files',$data);
+    }
+    public function inprocesslist(){
+        $data['pate_title'] = "In Process Files";
+        $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->where('status','In Process')->latest()->get();
+
+        return view('file.my_files',$data);
+    }
+    public function disposedlist(){
+        $data['pate_title'] = "Disposed Files";
+         $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->where('status','Disposed')->latest()->get();
+
+        return view('file.my_files',$data);
+    }
+
+    public function intransit(){
+        $data['pate_title'] = "In Transit Files";
+        $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',Auth::user()->section)->where('status','In Transit')->latest()->get();
+
+       return view('file.my_files',$data);
     }
 
     /**
@@ -51,9 +83,9 @@ class FileController extends Controller
     {
 
         $section = Section::where('id',Auth::user()->section)->first();
-        $id = File::latest()->first() ?? 0;
-        $prefix = $section->code.'-'.$id+1;
-        $track_number = $section->code.'-' . date('Y-m') . '-' . $id+1;
+        $id = File::latest()->first()->id + 1 ?? 0;
+        $prefix = $section->code.'-'.$id;
+        $track_number = $section->code.'-' . date('Y-m') . '-' .$id;
 
         $files = File::create([
             'created_by'=>Auth::user()->id,
@@ -92,7 +124,8 @@ class FileController extends Controller
             'file_id'=> $files->id,
             'from_section'=>Auth::user()->section,
             'to_section'=>$request->to_section,
-            'date'=>$request->date
+            'date'=>$request->date,
+            'content'=>"Please Check",
         ]);
         // return $request;
         return redirect()->route('file.index');

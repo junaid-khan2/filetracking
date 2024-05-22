@@ -7,83 +7,76 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-         <!-- Small boxes (Stat box) -->
-        <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3>150</h3>
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+            <h3>{{$created ?? 0}}</h3>
 
-                  <p>Created</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
+            <p>Created</p>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                  <p>Dispost</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
+            <div class="icon">
+            <i class="ion ion-bag"></i>
             </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3>44</h3>
-
-                  <p>In Process</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>65</h3>
-
-                  <p>In Transit</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
-          </div>
-          <!-- /.row -->
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+            <h3>{{$disposed ?? 0}}</h3>
+
+            <p>Dispost</p>
+            </div>
+            <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+            <h3>{{$inprocess ?? 0}}</h3>
+
+            <p>In Process</p>
+            </div>
+            <div class="icon">
+            <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+            <h3>{{$intransit ?? 0}}</h3>
+
+            <p>In Transit</p>
+            </div>
+            <div class="icon">
+            <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        </div>
+        <!-- ./col -->
+
+    </div>
+    <!-- /.row -->
+    </div>
         <div class="row">
             <div class="col-12">
               <div class="card">
-                <div class="card-header">
-                  <div class="form-check form-check-inline align-items-center">
-                    <input class="form-check-input" type="checkbox" value="" id="checkall">
-                    <label class="form-check-label mr-3" for="checkall">All Check</label>
-                    <button class="btn btn-success d-inline mx-1">Received</button>
-                    <button class="btn btn-danger d-inline mx-1">Reject</button>
-                  </div>
 
-                </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example1" class="table table-bordered table-hover">
@@ -91,17 +84,18 @@
 
                     <tr>
                       <th data-orderable="false">Action</th>
-                      <th data-orderable="false"> Check </th>
                       <th>Mester File</th>
                       <th>Subject</th>
                       <th>Bar Code</th>
-                      <th>Form User</th>
-                      <th>Forword User</th>
-                      <th>Forworded Date</th>
-                      <th>Days</th>
+                      <th>Initiates Section</th>
+                      <th>Current Section</th>
+                      <th>Status</th>
+                      <th>Receved Date</th>
+                      {{-- <th>Days On Desk</th> --}}
                     </tr>
                     </thead>
                     <tbody>
+                        @foreach ($File as $item)
                         <tr>
                             <td>
                                 <div class="btn-group">
@@ -110,24 +104,31 @@
                                       <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Received PUC</a>
-                                      <a class="dropdown-item" href="#">Reject PUC</a>
-                                      <a class="dropdown-item" href="#">Track</a>
+                                        <a class="dropdown-item" href="{{route('track.show',$item->id)}}"><i class="fa fa-search"></i> Track</a>
+                                      <a class="dropdown-item" href="{{route('forword.create',$item->id)}}"><i class="fa fa-angle-right"></i> Forword To</a>
+                                      <a class="dropdown-item" href="{{route('forword.inprocess',$item->id)}}"><i class="fa fa-tasks"></i> In Process</a>
+                                      <a class="dropdown-item" href="{{route('forword.desposed',$item->id)}}"><i class="fa fa-trash"></i> Desposed</a>
                                     </div>
                                   </div>
                             </td>
+                            <td>{{$item->misterFile->name}}</td>
+                            <td>{{$item->subject}}</td>
+                            <td>{{$item->track_number}}</td>
+                            <td>{{$item->initiatedbysection->name}}</td>
+                            <td>{{$item->recentSection->name}}</td>
                             <td>
-                                <input type="checkbox" name="" id="">
+                              @if ($item->status == "In Process")
+                                  <span class="badge badge-success">{{$item->status}}</span>
+                              @elseif ($item->status == "In Transit")
+                              <span class="badge badge-warning">{{$item->status}}</span>
+                              @else
+                                <span class="badge badge-danger">{{$item->status}}</span>
+                              @endif
                             </td>
-
-                            <td>Mester File Name</td>
-                            <td>Test Subject</td>
-                            <td>BAR-000107</td>
-                            <td>Khan</td>
-                            <td>Some One</td>
-                            <td>12-05-2024</td>
-                            <td>9</td>
+                            <td>{{$item->lastLog()->date}}</td>
+                            {{-- <td>9</td> --}}
                         </tr>
+                        @endforeach
                     </tbody>
 
                   </table>

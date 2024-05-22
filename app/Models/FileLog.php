@@ -20,7 +20,18 @@ class FileLog extends Model
         'status',
     ];
 
+    public function attachment(){
+        return $this->hasMany(Attachment::class,'file_log_id','id');
+    }
+
     public function modifybyLog(){
         return $this->hasOne(User::class,'id','last_modified_by');
+    }
+
+    public function from(){
+        return $this->hasOne(Section::class,'id','from_section');
+    }
+    public function to(){
+        return $this->hasOne(Section::class,'id','to_section');
     }
 }

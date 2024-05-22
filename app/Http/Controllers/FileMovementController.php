@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\FileLog;
 use App\Models\Section;
+use App\Models\Attachment;
 use Auth;
 
 class FileMovementController extends Controller
@@ -33,7 +34,11 @@ class FileMovementController extends Controller
      */
     public function store(Request $request)
     {
-
+       // return $request;
+        $file = File::find($request->file_id)->update([
+            'current_section' => $request->section,
+            'status'=>"In Transit"
+        ]);
         $log = FileLog::create([
             'last_modified_by'=> Auth::user()->id,
             'file_id'=> $request->file_id,
@@ -41,6 +46,7 @@ class FileMovementController extends Controller
             'to_section'=>$request->section,
             'content'=>$request->content,
             'date'=>date('Y-m-d'),
+            'status'=>"In Transit"
         ]);
 
         if ($request->hasFile('attachment')) {
@@ -66,7 +72,14 @@ class FileMovementController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['File'] =  File::with(['misterFile','attachment'])->findOrFail($id);
+        $data['FileLog'] = FileLog::where('file_id',$data['File']->id)->with('attachment','from','to')->get();
+        $data['created'] = FileLog::where('created_by',Auth::user()->id)->count();
+        $data['disposed'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','Dispost')->count();
+        $data['inprocess'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','In Process')->count();
+        $data['intransit'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','In Transit')->count();
+        // return $data;
+        return view('file.track',$data);
     }
 
     /**
@@ -74,7 +87,27 @@ class FileMovementController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       // return $request;
+    //    $file = File::find($id)->update([
+    //         'status'=>"In Process"
+    //     ]);
+    //     return back();
+    }
+    public function inprocess(string $id)
+    {
+       // return $request;
+       $file = File::find($id)->update([
+            'status'=>"In Process"
+        ]);
+        return back();
+    }
+    public function desposed(string $id)
+    {
+       // return $request;
+       $file = File::find($id)->update([
+            'status'=>"Dispost"
+        ]);
+        return back();
     }
 
     /**
