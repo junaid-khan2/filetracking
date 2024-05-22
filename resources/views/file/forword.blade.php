@@ -12,7 +12,10 @@
 
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form action="{{route('forword.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="from_section" value="{{$File->recentSection->id}}" id="">
+                <input type="hidden" name="file_id" value="{{$File->id}}" id="">
                 <div class="card-body">
                     <div class="col-md-12">
                         <div class="card">
@@ -50,8 +53,8 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <select class="form-control" aria-label="Default select example">
-                                        <option selected disabled>Select Deparment</option>
+                                    <select name="section" class="form-control" aria-label="Default select example">
+                                        <option selected disabled>Select Section</option>
                                         @foreach ($section as $item)
                                             <option value="{{$item->id}}">{{$item->name}}</option>
                                         @endforeach
@@ -65,13 +68,13 @@
                         <div class="row">
 
                             <div class="col-12">
-                                <textarea id="summernote" style="width: 50px">
+                                <textarea name="content" id="summernote" style="width: 50px">
 
                                 </textarea>
                             </div>
                             <div class="form-group">
                                 <label for="input1">Attachment</label>
-                                <input type="file" class="form-control" name="" id="">
+                                <input type="file" class="form-control" name="attachment" id="">
                             </div>
                         </div>
                     </fieldset>
