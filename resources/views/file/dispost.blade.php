@@ -1,4 +1,4 @@
-@extends('layouts.app',['page_title'=>'Forward File'])
+@extends('layouts.app',['page_title'=>'Complate File'])
 @push('style')
     <!-- Dropzone CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
@@ -12,7 +12,7 @@
 
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{route('forword.store')}}" method="POST" enctype="multipart/form-data">
+              <form action="{{route('forword.desposed.store',$File->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="from_section" value="{{$File->recentSection->id}}" id="">
                 <input type="hidden" name="file_id" value="{{$File->id}}" id="">
@@ -48,51 +48,10 @@
                         </div>
                     </div>
 
-                    <fieldset class="border px-3">
-
-                        @if ($File->file_type == "Letter")
+                    {{-- <fieldset class="border px-3">
                         <legend class="w-auto px-2">Deparment / Office Section</legend>
-                        <div class="row mb-3">
-                            <div class="col-6 offset-6 ">
-                                <div class="form-group">
-                                    <label for="search_file">Search File</label>
-                                    <input type="text" id="search_file_no" placeholder="Search File NO" class="form-control" name="search_file">
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row">
-
-                            <div class="col-6" >
-                                <div class="form-group">
-                                    <label for="file_name">File Name</label>
-                                    <input type="text" placeholder="File Name" class="form-control"
-                                        name="file_name" id="file_name">
-                                </div>
-                            </div>
-                            <div class="col-6" >
-                                <div class="form-group">
-                                    <label for="file_no">File No</label>
-                                    <input type="text" placeholder="File No" class="form-control"
-                                        name="file_no" id="file_no" readonly value="{{$file_no}}">
-                                </div>
-                            </div>
-                            {{-- <div class="col-6">
-                                <div class="form-group">
-                                    <label for="designation">Designation</label>
-                                    <select name="designation" class="form-control" aria-label="Default select example">
-                                        <option selected disabled>Select Designation</option>
-                                        <option value="Designation">Designation</option>
-                                        <option value="Designation">Designation 1</option>
-                                        <option value="Designation">Designation 2</option>
-                                        <option value="Designation">Designation 3</option>
-                                        <option value="Designation">Designation 4</option>
-                                      </select>
-                                </div>
-                            </div> --}}
-
                             <div class="col-6">
-                                <label for="dead_line">To Section </label>
                                 <div class="form-group">
                                     <select name="section" class="form-control" aria-label="Default select example">
                                         <option selected disabled>Select Section</option>
@@ -103,24 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                        @else
-                        <legend class="w-auto px-2">Deparment / Office Section</legend>
-                        <div class="row">
-                            <div class="col-6">
-
-                                <div class="form-group">
-                                    <select name="section" class="form-control" aria-label="Default select example">
-                                        <option selected disabled>Select Section</option>
-                                        @foreach ($section as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                      </select>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-
-                    </fieldset>
+                    </fieldset> --}}
                     <fieldset class="border px-3 mt-2">
                         <legend class="w-auto px-2"> Comments</legend>
                         <div class="row">
@@ -158,24 +100,6 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 <script>
     $(function () {
-        $('#search_file_no').on('keyup', function() {
-            var file_no = $(this).val();
-            if(file_no.length > 6){
-                $.ajax({
-                url: "{{ route('file.file_no_search') }}",
-                type: "GET",
-                data: { file_no: file_no },
-                success: function(response) {
-
-                    if(response.name && response.reference_no) {
-                        $("#file_name").val(response.name);
-                        $("#file_no").val(response.reference_no);
-                    }
-                }
-            });
-            }
-
-        });
       // Summernote
       $('#summernote').summernote()
 

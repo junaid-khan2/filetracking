@@ -108,7 +108,7 @@
                       @foreach ($File->attachment as $item)
                       <a  href="{{asset($item->path.$item->source)}}" target="_blank" class="btn btn-primary btn-sm">{{$item->source}} <i class="fa fa-download"></i></a>
                       @endforeach
-                     
+
                       {{-- <a class="btn btn-primary btn-sm">Attachment2</a>
                       <a class="btn btn-primary btn-sm">Attachment3</a> --}}
                     </div>
@@ -121,16 +121,16 @@
               <!-- The time line -->
               <div class="timeline">
                 <!-- timeline time label -->
-           
+
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
                 @foreach ($FileLog as $item)
                 <div>
                   <i class="fas fa-envelope bg-blue"></i>
                   <div class="timeline-item">
-                 
+
                     <span class="time">{{$item->date}} <i class="fas fa-clock"></i></span>
-                    <h3 class="timeline-header">{{$item->from->name}} To {{$item->to->name}}</h3>
+                    <h3 class="timeline-header">{{$item->from->name ?? ''}} To {{$item->to->name ?? ''}}</h3>
 
                     <div class="timeline-body">
                      {!! $item->content !!}
@@ -141,9 +141,9 @@
                       @endforeach
                     </div>
                   </div>
-                </div>   
+                </div>
                 @endforeach
-              
+
                 <!-- END timeline item -->
 
                 <div>

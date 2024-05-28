@@ -11,33 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('letters', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->bigInteger('created_section')->unsigned()->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->bigInteger('from_section')->unsigned()->nullable();
             $table->bigInteger('to_section')->unsigned()->nullable();
-            $table->bigInteger('letter_id')->unsigned()->nullable();
             $table->string('reference_no')->nullable();
             $table->string('letter_no')->nullable();
-            $table->string('file_type')->nullable();
             $table->string('belt_no')->nullable();
             $table->string('name')->nullable();
             $table->string('flag')->nullable();
-            $table->string('source')->nullable();
             $table->string('prefix')->nullable();
+            $table->string('file_type')->nullable();
+            $table->string('source')->nullable();
             $table->string('track_number')->nullable();
-            $table->string('date')->nullable();
             $table->string('letter_date')->nullable();
+            $table->string('date')->nullable();
             $table->string('subject')->nullable();
             $table->text('content')->nullable();
             $table->string('current_section')->nullable();
             $table->string('no_of_pages')->nullable();
-            $table->string('status')->nullable();
-            $table->string('file_no')->nullable();
             $table->string('dead_line')->nullable();
-            $table->string('file_name')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -47,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('letters');
     }
 };

@@ -14,7 +14,7 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                <a href="#" class="d-block">{{ Auth::user()->name ?? ''}}</a>
             </div>
         </div>
 
@@ -104,14 +104,14 @@
                             <a href="{{ route('myfile.inprocess') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>In Process</p>
-                                <span class="right badge badge-success">{{$fileCount['inprocess']}}</span>
+                                <span class="right badge badge-danger">{{$fileCount['inprocess']}}</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('myfile.disposed') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Disposed</p>
-                                <span class="right badge badge-danger">{{$fileCount['disposed']}}</span>
+                                <p>Complated</p>
+                                <span class="right badge badge-success">{{$fileCount['disposed']}}</span>
                             </a>
                         </li>
 
@@ -141,6 +141,7 @@
 
                     </ul>
                 </li> --}}
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
@@ -171,10 +172,49 @@
 
                     </ul>
                 </li>
+                @if (Auth::user()->role == "Super Admin")
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                           Section & Users
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('sections.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create Section</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('sections.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Section List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                            Profile
                             <i class="right fas fa-angle-left"></i>
@@ -189,6 +229,7 @@
                         </li>
                     </ul>
                 </li>
+
 
             </ul>
         </nav>

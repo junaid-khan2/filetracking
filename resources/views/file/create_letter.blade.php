@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page_title' => 'Create File'])
+@extends('layouts.app', ['page_title' => 'Create Letter'])
 @push('style')
     <!-- Dropzone CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css" rel="stylesheet">
@@ -14,7 +14,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('file.store.letter') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
 
@@ -22,30 +22,8 @@
                                     <legend class="w-auto px-2">Letter Section</legend>
 
                                     <div class="row">
-
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="input1">File Type</label>
-                                                <select id="file_type" name="file_type" class="form-control"
-                                                    aria-label="Default select example">
-
-                                                    <option selected disabled>Select File Type</option>
-                                                    <option value="File">File</option>
-                                                    <option value="Letter">Letter</option>
-                                                    <option value="Application">Application</option>
-                                                    <option value="Diary">Diary</option>
-
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-6" id="reference_no">
-                                            <div class="form-group">
-                                                <label for="input1">Reference No</label>
-                                                <input type="text" placeholder="Reference No" class="form-control"
-                                                    name="reference_no" readonly value="{{$reference_no}}">
-                                            </div>
-                                        </div>
+                                        <input type="hidden" name="file_type" value="Letter">
+                                        <input type="hidden" name="source" value="External">
                                         <div class="col-6" id="letter_no">
                                             <div class="form-group">
                                                 <label for="input1">Letter No</label>
@@ -53,13 +31,14 @@
                                                     name="letter_no">
                                             </div>
                                         </div>
-                                        <div class="col-6" id="belt_no">
+                                        <div class="col-6" id="reference_no">
                                             <div class="form-group">
-                                                <label for="input1">Belt No</label>
-                                                <input type="text" class="form-control" placeholder="Belt No"
-                                                    name="belt_no">
+                                                <label for="input1">Reference No</label>
+                                                <input type="text" placeholder="Reference No" class="form-control" value="{{$reference_no}}"
+                                                    name="reference_no" readonly>
                                             </div>
                                         </div>
+
                                         {{-- <div class="col-6">
                                 <div class="form-group">
                                     <label for="input1">Master File</label>
@@ -73,6 +52,19 @@
                             </div> --}}
                                         <div class="col-6">
                                             <div class="form-group">
+                                                <label for="input1">Nature Of Case</label>
+                                                <select name="case_type" class="form-control"
+                                                    aria-label="Default select example">
+                                                    <option selected disabled>Select Case Nature</option>
+                                                    @foreach ($category as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="form-group">
                                                 <label for="input1">Flag</label>
                                                 <select name="flag" class="form-control"
                                                     aria-label="Default select example">
@@ -84,31 +76,58 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
+
+
+                                        <div class="col-6" id="name">
                                             <div class="form-group">
-                                                <label>Source</label><br>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" checked type="radio" name="source"
-                                                        id="Internal" value="Internal">
-                                                    <label class="form-check-label" for="Internal">Internal</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="source"
-                                                        id="External" value="External">
-                                                    <label class="form-check-label" for="External">External</label>
-                                                </div>
+                                                <label for="input1">Name</label>
+                                                <input type="text" class="form-control" placeholder="Name"
+                                                    name="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-6" id="belt_no">
+                                            <div class="form-group">
+                                                <label for="input1">Belt No</label>
+                                                <input type="text" class="form-control" placeholder="Belt No"
+                                                    name="belt_no">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="input1">Nature Of Case</label>
-                                                <select name="case_type" class="form-control"
-                                                    aria-label="Default select example">
-                                                    <option selected disabled>Select Case Nature</option>
-                                                    @foreach ($category as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="no_of_pages">No of Pages</label>
+                                                <select name="no_of_pages" class="form-control" aria-label="Default select example">
+                                                    <option selected disabled>No of Pages</option>
+                                                    <option value="1 page">1 page</option>
+                                                    <option value="2 page">2 page</option>
+                                                    <option value="3 page">3 page</option>
+                                                    <option value="4 page">4 page</option>
+                                                    <option value="5 page">5 page</option>
+                                                    <option value="6 page">6 page</option>
+                                                    <option value="7 page">7 page</option>
+                                                    <option value="8 page">8 page</option>
+                                                    <option value="9 page">9 page</option>
+                                                    <option value="10 page">10 page</option>
+                                                    <option value="more then 10">more then 10</option>
+                                                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="dead_line">Dead Line </label>
+                                                <select name="dead_line" class="form-control" aria-label="Default select example">
+                                                    <option selected disabled>Dead Line </option>
+                                                    <option value="1 day">1 day</option>
+                                                    <option value="2 day">2 day</option>
+                                                    <option value="3 day">3 day</option>
+                                                    <option value="4 day">4 day</option>
+                                                    <option value="5 day">5 day</option>
+                                                    <option value="6 day">6 day</option>
+                                                    <option value="7 day">7 day</option>
+                                                    <option value="8 day">8 day</option>
+                                                    <option value="9 day">9 day</option>
+                                                    <option value="10 day">10 day</option>
+                                                    <option value="more then 10">more then 10</option>
+                                                  </select>
                                             </div>
                                         </div>
                                     </div>
@@ -118,13 +137,30 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
+                                                <label for="input1">From Section</label>
+                                                <select name="from_section" class="form-control" id="to_section"
+                                                    aria-label="Default select example">
+                                                    <option selected disabled>Select Department</option>
+                                                    <!-- Options will be loaded dynamically -->
+                                                    @foreach ($section as $item)
+                                                        @if ($item->in_out == "External")
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
                                                 <label for="input1">To Section</label>
                                                 <select name="to_section" class="form-control" id="to_section"
                                                     aria-label="Default select example">
                                                     <option selected disabled>Select Department</option>
                                                     <!-- Options will be loaded dynamically -->
                                                     @foreach ($section as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @if ($item->in_out == "Internal")
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -133,6 +169,12 @@
                                             <div class="form-group">
                                                 <label for="input1">Received Date</label>
                                                 <input type="date" value="{{date('Y-m-d')}}" class="form-control" name="date" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="input1">Letter Date</label>
+                                                <input type="date" value="{{date('Y-m-d')}}" class="form-control" name="letter_date" id="">
                                             </div>
                                         </div>
 

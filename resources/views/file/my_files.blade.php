@@ -19,7 +19,6 @@
                     <thead>
 
                     <tr>
-                      <th>Mester File</th>
                       <th>Subject</th>
                       <th>Bar Code</th>
                       <th>Initiates Section</th>
@@ -33,18 +32,17 @@
                         @foreach ($File as $item)
                         <tr>
 
-                            <td>{{$item->misterFile->name}}</td>
                             <td>{{$item->subject}}</td>
                             <td>{{$item->track_number}}</td>
                             <td>{{$item->initiatedbysection->name}}</td>
                             <td>{{$item->recentSection->name}}</td>
                             <td>
                               @if ($item->status == "In Process")
-                                  <span class="badge badge-success">{{$item->status}}</span>
+                                  <span class="badge badge-danger">{{$item->status}}</span>
                               @elseif ($item->status == "In Transit")
                               <span class="badge badge-warning">{{$item->status}}</span>
-                              @else
-                                <span class="badge badge-danger">{{$item->status}}</span>
+                              @elseif ($item->status == "Dispost")
+                                <span class="badge badge-success">Completed</span>
                               @endif
                             </td>
                             <td>{{$item->lastLog()->date}}</td>

@@ -11,7 +11,8 @@ class Section extends Model
 
     protected $fillable = [
         'name',
-        'code'
+        'code',
+        'in_out'
     ] ;
 
     public function files(){

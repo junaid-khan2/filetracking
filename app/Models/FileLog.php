@@ -11,6 +11,7 @@ class FileLog extends Model
     protected $fillable = [
         'created_by',
         'last_modified_by',
+        'letter_id',
         'file_id',
         'from_section',
         'to_section',

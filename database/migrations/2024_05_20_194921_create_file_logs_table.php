@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->bigInteger('last_modified_by')->unsigned()->nullable();
+            $table->bigInteger('letter_id')->unsigned()->nullable();
             $table->bigInteger('file_id')->unsigned()->nullable();
             $table->bigInteger('from_section')->unsigned()->nullable();
             $table->bigInteger('to_section')->unsigned()->nullable();

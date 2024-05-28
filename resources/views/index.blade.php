@@ -122,7 +122,7 @@
               <!-- /.info-box -->
 
               <!-- Info Boxes Style 2 -->
-              <div class="info-box mb-3 bg-danger">
+              <div class="info-box mb-3 bg-warning">
                 <span class="info-box-icon"><i class="fas fa-tag"></i></span>
 
                 <div class="info-box-content">
@@ -133,7 +133,7 @@
                 <!-- /.info-box-content -->
               </div>
               <!-- /.info-box -->
-              <div class="info-box mb-3 bg-warning">
+              <div class="info-box mb-3 bg-danger">
                 <span class="info-box-icon"><i class="far fa-heart"></i></span>
 
                 <div class="info-box-content">
@@ -222,7 +222,8 @@
       datasets: [
         {
           data: [{{$intransit ?? 0}},{{$inprocess ?? 0}},{{$dispost ?? 0}},{{$created ?? 0}}],
-          backgroundColor : ['#ffc107', '#28a745', '#dc3545', '#17a2b8'],
+          backgroundColor : ['#ffc107', '#dc3545', '#28a745', '#17a2b8'],
+        //   backgroundColor : ['#ffc107', '#28a745', '', '#17a2b8'],
         }
       ]
     }
@@ -272,15 +273,15 @@ const sectionChart = new Chart(ctx, {
             {
                 label: 'In Process Count',
                 data: inProcessCounts,
-                backgroundColor: '#ffc107',
-                borderColor: '#ffc107',
+                backgroundColor: '#dc3545',
+                borderColor: '#dc3545',
                 borderWidth: 1
             },
             {
                 label: 'Transit Count',
                 data: transitCounts,
-                backgroundColor: '#dc3545',
-                borderColor: '#dc3545',
+                backgroundColor: '#ffc107',
+                borderColor: '#ffc107',
                 borderWidth: 1
             }
         ]

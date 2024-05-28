@@ -84,7 +84,6 @@
 
                     <tr>
                       <th data-orderable="false">Action</th>
-                      <th>Mester File</th>
                       <th>Subject</th>
                       <th>Bar Code</th>
                       <th>Initiates Section</th>
@@ -111,18 +110,17 @@
                                     </div>
                                   </div>
                             </td>
-                            <td>{{$item->misterFile->name}}</td>
                             <td>{{$item->subject}}</td>
                             <td>{{$item->track_number}}</td>
                             <td>{{$item->initiatedbysection->name}}</td>
                             <td>{{$item->recentSection->name}}</td>
                             <td>
                               @if ($item->status == "In Process")
-                                  <span class="badge badge-success">{{$item->status}}</span>
+                                  <span class="badge badge-danger">{{$item->status}}</span>
                               @elseif ($item->status == "In Transit")
                               <span class="badge badge-warning">{{$item->status}}</span>
-                              @else
-                                <span class="badge badge-danger">{{$item->status}}</span>
+                              @if ($item->status == "Dispost")
+                                <span class="badge badge-success">Competed</span>
                               @endif
                             </td>
                             <td>{{$item->lastLog()->date}}</td>

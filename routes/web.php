@@ -6,9 +6,12 @@ use App\Http\Controllers\MisterFileController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileMovementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\UsersController;
+
 
 Route::get('/', function () {
-    return  redirect()->route('dashboard');
+    return  redirect()->route('login');
 });
 
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
@@ -16,13 +19,25 @@ Route::get('/report', [DashboardController::class,'report'])->name('report');
 Route::get('/report/section/{section}/{type}', [DashboardController::class,'reportSetionType'])->name('report.section');
 
 
-
-
 Route::middleware('auth')->group(function () {
+
+
+    // Ajax Search For File
+
+    Route::get('/file/file_no_search',[FileController::class,'fileNoSearch'])->name('file.file_no_search');
 
     // mister File
     Route::resource('/masterfile',MisterFileController::class);
     Route::resource('/file',FileController::class);
+    Route::post('/file/store/letter',[FileController::class,'letter_store'])->name('file.store.letter');
+
+    // for daynamic load
+    Route::get('/sections/by-source', [SectionController::class, 'getSectionsBySource'])->name('sections.bySource');
+    // sections
+    Route::resource('/sections',SectionController::class);
+
+    Route::resource('/users',UsersController::class);
+
     Route::get('/myfile/create',[FileController::class,'createlist'])->name('myfile.create');
     Route::get('/myfile/inprocess',[FileController::class,'inprocesslist'])->name('myfile.inprocess');
     Route::get('/myfile/disposed',[FileController::class,'disposedlist'])->name('myfile.disposed');
@@ -31,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/forword/create/{id}',[FileMovementController::class,'create'])->name('forword.create');
     Route::get('/forword/inprocess/{id}',[FileMovementController::class,'inprocess'])->name('forword.inprocess');
     Route::get('/forword/desposed/{id}',[FileMovementController::class,'desposed'])->name('forword.desposed');
+    Route::post('/forword/desposed/{id}/store',[FileMovementController::class,'desposed_store'])->name('forword.desposed.store');
 
     Route::get('/track/show/{id}',[FileMovementController::class,'show'])->name('track.show');
     Route::resource('forword', FileMovementController::class)->except(['create','show']);

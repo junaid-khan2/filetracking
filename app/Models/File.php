@@ -13,24 +13,31 @@ class File extends Model
         'created_by',
         'created_section',
         'mester_file_id',
-        'source',
         'category_id',
         'section_id',
-        'prefix',
+        'from_section',
+        'to_section',
+        'letter_id',
+        'reference_no',
+        'letter_no',
+        'belt_no',
+        'name',
         'flag',
+        'prefix',
         'file_type',
+        'source',
         'track_number',
+        'letter_date',
         'date',
         'subject',
         'content',
         'current_section',
         'status',
+        'file_no',
+        'file_name',
+        'designation',
     ];
 
-    public function misterFile()
-    {
-        return $this->hasOne(MesterFile::class, 'id', 'mester_file_id');
-    }
 
     public function fileLog(){
         return $this->hasMany(FileLog::class,'file_id','id');
@@ -56,6 +63,10 @@ class File extends Model
         }
     }
 
+    public function fileDetails(){
+        return $this->hasOne(FileDetail::class,'file_id','id');
+    }
+
     public function initiatedby(){
         return $this->hasOne(User::class,'id','created_by');
     }
@@ -66,8 +77,15 @@ class File extends Model
         return $this->hasOne(Section::class,'id','current_section');
     }
 
+    public function letters()
+    {
+        return $this->belongsToMany(File::class, 'file_letter', 'file_id', 'letter_id')->where('file_type', 'letter');
+    }
 
-
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'file_letter', 'letter_id', 'file_id')->where('file_type', 'file');
+    }
 
 
 }

@@ -66,10 +66,14 @@ class DashboardController extends Controller
     public function reportSetionType($setion, $type){
         if($type == "Created"){
             $data['pate_title'] = "In Transit Files";
-            $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('created_section',$setion)->latest()->get();
-        }else{
+            $data['File'] =  File::with(['fileLog','attachment'])->where('created_section',$setion)->latest()->get();
+        }else if($type == "Completed"){
             $data['pate_title'] = "In Transit Files";
-            $data['File'] =  File::with(['misterFile','fileLog','attachment'])->where('current_section',$setion)->where('status',$type)->latest()->get();
+            $data['File'] =  File::with(['fileLog','attachment'])->where('current_section',$setion)->where('status',"Dispost")->latest()->get();
+        }
+        else{
+            $data['pate_title'] = "In Transit Files";
+            $data['File'] =  File::with(['fileLog','attachment'])->where('current_section',$setion)->where('status',$type)->latest()->get();
         }
 
 

@@ -27,7 +27,7 @@
 
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-danger">
+          <div class="small-box bg-warning">
               <div class="inner">
               <h3>{{$intransit ?? 0}}</h3>
 
@@ -39,11 +39,11 @@
               <a href="{{route('myfile.intransit')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-      
+
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-warning">
+          <div class="small-box bg-danger">
               <div class="inner">
               <h3>{{$inprocess ?? 0}}</h3>
 
@@ -56,13 +56,13 @@
           </div>
         </div>
         <!-- ./col -->
-       
+
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <div class="small-box bg-success">
               <div class="inner">
               <h3>{{$disposed ?? 0}}</h3>
-  
+
               <p>Completed</p>
               </div>
               <div class="icon">
@@ -87,7 +87,6 @@
 
                     <tr>
                       <th data-orderable="false">Action</th>
-                      <th>Mester File</th>
                       <th>Subject</th>
                       <th>Bar Code</th>
                       <th>Initiates Section</th>
@@ -114,18 +113,17 @@
                                     </div>
                                   </div>
                             </td>
-                            <td>{{$item->misterFile->name}}</td>
-                            <td>{{$item->subject}}</td>
+                            <td>{{$item->subject ?? $item->name}}</td>
                             <td>{{$item->track_number}}</td>
                             <td>{{$item->initiatedbysection->name}}</td>
                             <td>{{$item->recentSection->name}}</td>
                             <td>
                               @if ($item->status == "In Process")
-                                  <span class="badge badge-success">{{$item->status}}</span>
+                                  <span class="badge badge-danger">{{$item->status}}</span>
                               @elseif ($item->status == "In Transit")
                               <span class="badge badge-warning">{{$item->status}}</span>
-                              @else
-                                <span class="badge badge-danger">{{$item->status}}</span>
+                              @elseif ($item->status == "Dispost")
+                                <span class="badge badge-success">Completed</span>
                               @endif
                             </td>
                             <td>{{$item->lastLog()->date}}</td>
