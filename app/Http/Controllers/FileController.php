@@ -40,6 +40,15 @@ class FileController extends Controller
         return view('mydesk.index',$data);
     }
 
+    public function fileOutBound(){
+        $data['file'] = File::where('file_type','File')->where('created_section', Auth::user()->section)->get();
+       return view('mydesk.my_outbound_file',$data);
+    }
+    public function letterOutBound(){
+        $data['letter'] = File::where('file_type','Letter')->where('created_section', Auth::user()->section)->get();
+        return view('mydesk.my_outbound_letter',$data);
+    }
+
     public function createlist(){
         $data['pate_title'] = "Created Files";
          $data['File'] =  File::with(['fileLog','attachment'])->where('created_by',Auth::user()->id)->latest()->get();
@@ -74,7 +83,17 @@ class FileController extends Controller
         $data['category'] = Category::all();
         $data['masterfile'] = MesterFile::all();
 
-        $data['reference_no'] = Auth::user()->sections->code .'-'. date('Y-m').'-'.(File::where('created_section',Auth::user()->section)->latest()->first()->id ?? 0) + 1;
+        $lastFile = File::where('created_section', Auth::user()->section)
+        ->orderBy('id', 'desc')
+        ->first();
+
+        $lastNumber = $lastFile ? explode('-', $lastFile->reference_no)[3] : 0;
+
+        $data['reference_no'] = Auth::user()->sections->code
+                        . '-'
+                        . date('Y-m')
+                        . '-'
+                        . ($lastNumber + 1);
 
         if(Auth::user()->sections->code == "GB"){
             $data['section'] = Section::get();

@@ -27,7 +27,18 @@ class FileMovementController extends Controller
     public function create($id)
     {
         $data['File'] =  File::with(['fileLog','attachment','initiatedbysection','recentSection'])->where('id',$id)->first();
-        $data['file_no'] = Auth::user()->sections->code .'-'. date('Y-m').'-'.(File::where('created_section',Auth::user()->section)->latest()->first()->id ?? 0) + 1;
+        $lastFile = File::where('created_section', Auth::user()->section)
+        ->orderBy('id', 'desc')
+        ->first();
+
+        $lastNumber = $lastFile ? explode('-', $lastFile->file_no)[3] : 0;
+
+        $data['file_no'] = Auth::user()->sections->code
+                . '-'
+                . date('Y-m')
+                . '-'
+                . ($lastNumber + 1);
+
         $data['section'] = Section::all();
         return view('file.forword',$data);
     }
@@ -116,7 +127,7 @@ class FileMovementController extends Controller
      */
     public function show(string $id)
     {
-        $data['File'] =  File::with(['attachment'])->findOrFail($id);
+        $data['File'] =  File::with(['attachment','letters'])->findOrFail($id);
         $data['FileLog'] = FileLog::where('file_id',$data['File']->id)->with('attachment','from','to')->get();
         $data['created'] = FileLog::where('created_by',Auth::user()->id)->count();
         $data['disposed'] = FileLog::where('last_modified_by',Auth::user()->id)->where('status','Dispost')->count();

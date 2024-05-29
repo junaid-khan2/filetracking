@@ -31,11 +31,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('/file',FileController::class);
     Route::post('/file/store/letter',[FileController::class,'letter_store'])->name('file.store.letter');
 
+
+    // Out Bound
+    Route::get('/myfile/outbound/file',[FileController::class,'fileOutBound'])->name('myfile.outbound.file');
+    Route::get('/myfile/outbound/letter',[FileController::class,'letterOutBound'])->name('myfile.outbound.letter');
+
     // for daynamic load
     Route::get('/sections/by-source', [SectionController::class, 'getSectionsBySource'])->name('sections.bySource');
     // sections
     Route::resource('/sections',SectionController::class);
-
     Route::resource('/users',UsersController::class);
 
     Route::get('/myfile/create',[FileController::class,'createlist'])->name('myfile.create');

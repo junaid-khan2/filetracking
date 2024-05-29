@@ -34,7 +34,7 @@
                                   {{--
                                   <span class="mx-3"></span>
                                   <hr> --}}
-                                  <span class="description"><strong>Subject : </strong> {{$File->subject}} </span>
+                                  <span class="description"><strong>Subject : </strong> {{$File->subject ?? $File->name}} </span>
                                 </div>
                                 <!-- /.user-block -->
                                 <p>

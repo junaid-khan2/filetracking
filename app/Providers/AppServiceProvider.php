@@ -23,12 +23,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*', function ($view) {
-           
+
             if ($user = Auth::user()) {
-                $data['created'] = FileLog::where('created_by', $user->id)->count() ?? 0;
-                $data['disposed'] = File::where('current_section', $user->id)->where('status', 'Dispost')->count();
-                $data['inprocess'] = File::where('current_section', $user->id)->where('status', 'In Process')->count();
-                $data['intransit'] = File::where('current_section', $user->section)->where('status', 'In Transit')->count();
+                $data['created'] = File::where('current_section', Auth::user()->section)->count() ?? 0;
+                $data['outBoundFile'] = File::where('file_type','File')->where('created_section', Auth::user()->section)->count() ?? 0;
+                $data['outBoundLetter'] = File::where('file_type','Letter')->where('created_section', Auth::user()->section)->count() ?? 0;
+                $data['disposed'] = File::where('current_section', Auth::user()->section)->where('status', 'Dispost')->count();
+                $data['inprocess'] = File::where('current_section', Auth::user()->section)->where('status', 'In Process')->count();
+                $data['intransit'] = File::where('current_section', Auth::user()->section)->where('status', 'In Transit')->count();
             }else{
                 $data['created'] = 0;
                 $data['disposed'] = 0;

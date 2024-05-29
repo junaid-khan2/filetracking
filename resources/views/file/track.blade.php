@@ -96,7 +96,7 @@
                         {{--
                         <span class="mx-3"></span>
                         <hr> --}}
-                        <span class="description"><strong>Subject : </strong> {{$File->subject}} </span>
+                        <span class="description"><strong>Subject : </strong> {{$File->subject ?? $File->name}} </span>
                       </div>
                       <!-- /.user-block -->
                       <p>
@@ -152,6 +152,48 @@
               </div>
             </div>
             <!-- /.col -->
+            <div class="col-md-12">
+                <h1 class="text-center">Letters</h1>
+            </div>
+          @foreach ($File->letters as $item)
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+
+                <!-- Post -->
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+                    <span class="username">
+                      <span >{{$item->initiatedbysection->name}}</span>
+
+
+                    </span>
+                    {{--
+                    <span class="mx-3"></span>
+                    <hr> --}}
+                    <span class="description"><strong>Subject : </strong> {{$item->subject ?? $item->name}} </span>
+                  </div>
+                  <!-- /.user-block -->
+                  <p>
+                  {!! $item->content !!}
+                  </p>
+
+                </div>
+                <div class="timeline-footer">
+                  @foreach ($item->attachment as $item)
+                  <a  href="{{asset($item->path.$item->source)}}" target="_blank" class="btn btn-primary btn-sm">{{$item->source}} <i class="fa fa-download"></i></a>
+                  @endforeach
+
+                  {{-- <a class="btn btn-primary btn-sm">Attachment2</a>
+                  <a class="btn btn-primary btn-sm">Attachment3</a> --}}
+                </div>
+
+                <!-- /.post -->
+              </div>
+            </div>
+        </div>
+          @endforeach
           </div>
   </div>
 </section>

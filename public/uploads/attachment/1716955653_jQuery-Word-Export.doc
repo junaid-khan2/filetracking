@@ -1,0 +1,62 @@
+Mime-Version: 1.0
+Content-Base: http://localhost/FTS/report_file_details-pendency_digh_print.php
+Content-Type: Multipart/related; boundary="NEXT.ITEM-BOUNDARY";type="text/html"
+
+--NEXT.ITEM-BOUNDARY
+Content-Type: text/html; charset="utf-8"
+Content-Location: http://localhost/FTS/report_file_details-pendency_digh_print.php
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+
+</style>
+</head>
+<body>
+                      <style>
+                      table, td
+{
+  border-collapse:collapse;
+  border: 1px solid #666;
+  text-transform:capitalize;
+  text-align:left;
+}
+table, th { border-collapse:collapse;
+  border: 1px solid #666;font-weight:100; color:#000; font-size:12px; text-align:left !important;}
+  .red {color:#FFF; background:#F00 !important;}
+  .yellow {color:#000; background:#CC0 !important;}
+  .green {color:#000; background:#090 !important;}
+                      </style>
+                      
+					 <table width="80%">
+                     
+					  <thead style="font-weight:bold; color:#000 !important;">
+                      
+                     
+					  <tr>
+                      <th width="7%">S.No</th>
+					  <th width="26%">Section</th>
+					  
+					 <th width="25%">No of Files Pending</th>
+					  </tr>
+					  </thead>
+					  <tbody>
+                      
+                     
+					  											
+							<tr class="alt-row">
+                            
+                            <td>1</td>
+							<td>Establishment E-1</td>
+                            <td> 1							
+							</td>
+							
+							
+
+							</tr>
+												  </tbody>
+					  </table>
+                      </body></html>
+--NEXT.ITEM-BOUNDARY--

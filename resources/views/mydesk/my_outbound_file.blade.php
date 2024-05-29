@@ -1,4 +1,4 @@
-@extends('layouts.app',['page_title'=>$pate_title])
+@extends('layouts.app',['page_title'=>'My OutBound Files'])
 @push('style')
  <!-- DataTables -->
  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -19,6 +19,7 @@
                     <thead>
 
                     <tr>
+                      <th data-orderable="false">Action</th>
                       <th>Subject</th>
                       <th>Bar Code</th>
                       <th>Initiates Section</th>
@@ -29,13 +30,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($File as $item)
+                        @foreach ($file as $item)
                         <tr>
-
-                            <td>{{$item->subject ?? ''}}</td>
-                            <td>{{$item->track_number ?? ''}}</td>
-                            <td>{{$item->initiatedbysection->name ?? ''}}</td>
-                            <td>{{$item->recentSection->name ?? ''}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary">Action</button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{route('track.show',$item->id)}}"><i class="fa fa-search"></i> Track</a>
+                                      <a class="dropdown-item" href="{{route('forword.create',$item->id)}}"><i class="fa fa-angle-right"></i> Forword To</a>
+                                      <a class="dropdown-item" href="{{route('forword.inprocess',$item->id)}}"><i class="fa fa-tasks"></i> In Process</a>
+                                      <a class="dropdown-item" href="{{route('forword.desposed',$item->id)}}"><i class="fa fa-trash"></i> Desposed</a>
+                                    </div>
+                                  </div>
+                            </td>
+                            <td>{{$item->subject ?? $item->name}}</td>
+                            <td>{{$item->track_number}}</td>
+                            <td>{{$item->initiatedbysection->name}}</td>
+                            <td>{{$item->recentSection->name}}</td>
                             <td>
                               @if ($item->status == "In Process")
                                   <span class="badge badge-danger">{{$item->status}}</span>
@@ -82,7 +96,6 @@
         "lengthChange": false,
         "searching": true,
         "ordering": true,
-         "order": [[1, 'desc'], [0, 'desc']],
         "info": true,
         "autoWidth": false,
         "responsive": true,

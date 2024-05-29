@@ -79,12 +79,12 @@ class File extends Model
 
     public function letters()
     {
-        return $this->belongsToMany(File::class, 'file_letter', 'file_id', 'letter_id')->where('file_type', 'letter');
+        return $this->belongsToMany(File::class, FileLetter::class, 'file_id', 'letter_id')->where('file_type', 'letter');
     }
 
     public function files()
     {
-        return $this->belongsToMany(File::class, 'file_letter', 'letter_id', 'file_id')->where('file_type', 'file');
+        return $this->belongsToMany(File::class, FileLetter::class, 'letter_id', 'file_id')->where('file_type', 'file');
     }
 
 
