@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\File;
+use App\Models\User;
 
 use App\Models\Section;
 use Carbon\Carbon;
@@ -233,6 +234,36 @@ class DashboardController extends Controller
             }
 
             $data['typeWise1'] = $typeWise1;
+
+
+            $data['top_10_file'] =  File::latest()->take(10)->get();
+
+            $AdminUsers = User::with('multiSection')
+            ->where('role', 'Admin')
+            ->get();
+ 
+        $fileTypes = ["File", "Letter", "Reply", "NoteSheet"];
+        $mysecData1 = [];
+ 
+        foreach ($AdminUsers as $admin) {
+            $mysecstions = $admin->multiSection->pluck('id');
+ 
+            foreach ($fileTypes as $type) {
+                $data11 = [
+                    'adminName' => $admin->name,
+                    'type' => $type,
+                    'Created' => File::whereIn('created_section', $mysecstions)->where('file_type', $type)->count(),
+                    'InTransit' => File::whereIn('current_section', $mysecstions)->where('file_type', $type)->where('status', 'In Transit')->count(),
+                    'InProcess' => File::whereIn('current_section', $mysecstions)->where('file_type', $type)->where('status', 'In Process')->count(),
+                    'Dispost' => File::whereIn('current_section', $mysecstions)->where('file_type', $type)->where('status', 'Dispost')->count(),
+                    'total' => File::whereIn('current_section', $mysecstions)->where('file_type', $type)->count(),
+                ];
+ 
+                $mysecData1[] = $data11;
+            }
+        }
+ 
+        $data['mysecData1'] =  $mysecData1;
 
 
 
@@ -974,4 +1005,3 @@ class DashboardController extends Controller
     }
 
 }
-

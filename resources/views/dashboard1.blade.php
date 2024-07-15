@@ -13,7 +13,39 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard/style.css') }}">
     <style>
+        .progress-bar-success {
+            background-color: #5cb85c;
+        }
 
+        .progress-bar-warning {
+            background-color: #f0ad4e;
+        }
+
+        .progress-bar-danger {
+            background-color: #d9534f;
+        }
+
+        .progress {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            height: 1.5rem;
+            overflow: hidden;
+            line-height: 17px;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: #e9ecef;
+            border-radius: 1rem;
+            box-shadow: inset 0 .1rem .1rem rgba(0, 0, 0, .1);
+        }
+
+        .dashboard-card-five .card-body .traffic-table .table tbody tr td {
+            color: black !important;
+            font-weight: normal !important;
+            /* border-top: none; */
+            padding: 8px 5px !important;
+
+        }
     </style>
 @endpush
 
@@ -113,20 +145,20 @@
                             <div class="item-content">
                                 <div class="single-item pseudo-bg-Aquamarine">
                                     <h4>Files</h4>
-                                    {{ $currentWeekFiles }}
+                                    {{ $currentWeekFiles ?? 0 }}
                                 </div>
                                 <div class="single-item pseudo-bg-blue">
                                     <h4>Letters</h4>
-                                    {{ $currentWeekLetter }}
+                                    {{ $currentWeekLetter ?? 0 }}
                                 </div>
                                 <div class="single-item pseudo-bg-yellow">
                                     <h4>Note Sheets</h4>
-                                    {{ $currentWeekNoteSheet }}
+                                    {{ $currentWeekNoteSheet ?? 0 }}
                                 </div>
                                 <div class="single-item pseudo-bg-red">
                                     <h4>Replies</h4>
 
-                                    {{ $currentWeekReply }}
+                                    {{ $currentWeekReply ?? 0 }}
 
 
                                 </div>
@@ -293,7 +325,7 @@
                 </div>
 
             </div> --}}
-            <div class="col-lg-6 col-xl-6 col-4-xxxl">
+            <div class="col-lg-8 col-xl-8 col-8-xxxl">
                 <div class="card dashboard-card-five pd-b-20">
                     <div class="card-body pd-b-14">
                         <div class="heading-layout1">
@@ -321,206 +353,132 @@
                             </ul>
                         </div>
 
-                        <h6 class="traffic-title">Unique Visitors</h6>
-                        <div class="traffic-number">2,590</div>
 
-                        <div class="traffic-bar">
-                            <div class="direct" data-toggle="tooltip" data-placement="top" title="File">
-                            </div>
-                            <div class="search" data-toggle="tooltip" data-placement="top" title="Letter">
-                            </div>
-                            <div class="referrals" data-toggle="tooltip" data-placement="top" title="Note Sheet">
-                            </div>
-                            <div class="social" data-toggle="tooltip" data-placement="top" title="Replay">
-                            </div>
-                        </div>
+
+
                         <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade" id="file">
-                            <div class="traffic-table table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-Aquamarine">Files</td>
-                                            <td>12,890</td>
-                                            <td>50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-blue">Letters</td>
-                                            <td>7,245</td>
-                                            <td>27%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-yellow">Note Sheets</td>
-                                            <td>4,256</td>
-                                            <td>8%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-red">Replies</td>
-                                            <td>500</td>
-                                            <td>7%</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="letter">
-                            <div class="traffic-table table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-Aquamarine">Files</td>
-                                            <td>12,890</td>
-                                            <td>50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-blue">Letters</td>
-                                            <td>7,245</td>
-                                            <td>27%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-yellow">Note Sheets</td>
-                                            <td>4,256</td>
-                                            <td>8%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-red">Replies</td>
-                                            <td>500</td>
-                                            <td>7%</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="notesheet">
-                            <div class="traffic-table table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-Aquamarine">Files</td>
-                                            <td>12,890</td>
-                                            <td>50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-blue">Letters</td>
-                                            <td>7,245</td>
-                                            <td>27%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-yellow">Note Sheets</td>
-                                            <td>4,256</td>
-                                            <td>8%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-red">Replies</td>
-                                            <td>500</td>
-                                            <td>7%</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="reply">
-                            <div class="traffic-table table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-Aquamarine">Files</td>
-                                            <td>12,890</td>
-                                            <td>50%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-blue">Letters</td>
-                                            <td>7,245</td>
-                                            <td>27%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-yellow">Note Sheets</td>
-                                            <td>4,256</td>
-                                            <td>8%</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="t-title pseudo-bg-red">Replies</td>
-                                            <td>500</td>
-                                            <td>7%</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        </div>
+                            <div role="tabpanel" class="tab-pane fade active show" id="file">
+                                <div class="traffic-table table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Area</th>
+                                                {{-- <th>Created</th> --}}
+                                                <th>In Transit</th>
+                                                <th>In Process</th>
+                                                <th>Completed</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($mysecData1 as $item)
+                                                @if ($item['type'] == 'File')
+                                                    <tr>
+                                                        <td>{{ $item['adminName'] }}</td>
+                                                        {{-- <td class="text-center">{{ $item['Created'] }}</td> --}}
+                                                        <td class="text-center">{{ $item['InTransit'] }}</td>
+                                                        <td class="text-center">{{ $item['InProcess'] }}</td>
+                                                        <td class="text-center">{{ $item['Dispost'] }}</td>
+                                                        <td class="text-center">{{ $item['total'] }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-12">
-                <div class="card dashboard-card-six">
-                    <div class="card-body">
-                        <div class="heading-layout1 mg-b-17">
-                            <div class="item-title">
-                                <h3>Notifications</h3>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                    aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                            <div role="tabpanel" class="tab-pane fade" id="letter">
+                                <div class="traffic-table table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-Aquamarine">Files</td>
+                                                <td>12,890</td>
+                                                <td>50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-blue">Letters</td>
+                                                <td>7,245</td>
+                                                <td>27%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-yellow">Note Sheets</td>
+                                                <td>4,256</td>
+                                                <td>8%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-red">Replies</td>
+                                                <td>500</td>
+                                                <td>7%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="notesheet">
+                                <div class="traffic-table table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-Aquamarine">Files</td>
+                                                <td>12,890</td>
+                                                <td>50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-blue">Letters</td>
+                                                <td>7,245</td>
+                                                <td>27%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-yellow">Note Sheets</td>
+                                                <td>4,256</td>
+                                                <td>8%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-red">Replies</td>
+                                                <td>500</td>
+                                                <td>7%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="reply">
+                                <div class="traffic-table table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-Aquamarine">Files</td>
+                                                <td>12,890</td>
+                                                <td>50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-blue">Letters</td>
+                                                <td>7,245</td>
+                                                <td>27%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-yellow">Note Sheets</td>
+                                                <td>4,256</td>
+                                                <td>8%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="t-title pseudo-bg-red">Replies</td>
+                                                <td>500</td>
+                                                <td>7%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="notice-box-wrap ">
-                            <div class="notice-list">
-                                <div class="post-date bg-red">Most Immediate</div>
-                                <h6 class="notice-title"><a href="#">
-                                        File: GB/2024/1/E3
-                                        <br>
-                                        Subject: Testing Subject
-                                    </a></h6>
-                                <div class="entry-meta"> Genral Branch | <span>12/07/2024</span></div>
-                            </div>
-                            <div class="notice-list">
-                                <div class="post-date bg-yellow">16 June, 2019</div>
-                                <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
-                                <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                            </div>
-                            <div class="notice-list">
-                                <div class="post-date bg-pink">16 June, 2019</div>
-                                <h6 class="notice-title"><a href="#">Great School manag Nulla rhoncus eleifensed
-                                        mim
-                                        us mi faucibus id. Mauris vestibulum non purus lobortismenearea</a></h6>
-                                <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                            </div>
-                            <div class="notice-list">
-                                <div class="post-date bg-blue">16 June, 2019</div>
-                                <h6 class="notice-title"><a href="#">Great School manag mene esom text of the
-                                        printing.</a></h6>
-                                <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                            </div>
-                            <div class="notice-list">
-                                <div class="post-date bg-yellow">16 June, 2019</div>
-                                <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
-                                <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                            </div>
-                            <div class="notice-list">
-                                <div class="post-date bg-blue">16 June, 2019</div>
-                                <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
-                                <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                            </div>
-                            <div class="notice-list">
-                                <div class="post-date bg-pink">16 June, 2019</div>
-                                <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
-                                <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-xl-6 col-4-xxxl">
+
+            <div class="col-lg-4 col-xl-4 col-4-xxxl">
                 <div class="card dashboard-card-six pd-b-20">
                     <div class="card-body">
                         <div class="heading-layout1 mg-b-17">
@@ -530,42 +488,44 @@
 
                         </div>
                         <div class="notice-box-wrap">
-                            @foreach ($typeWise as $fileType => $counts)
-                                <div class="notice-list">
-                                    <div
-                                        class="post-date
-                                    @if ($fileType == 'Normal') bg-yellow
-                                    @elseif($fileType == 'Urgent')
-                                    bg-blue
-                                    @elseif($fileType == 'Immediate')
-                                    bg-pink
-                                    @elseif($fileType == 'Most Immediate')
-                                    bg-red @endif
-                                    ">
-                                        {{ $fileType }} <!-- Display the file type -->
-                                    </div>
-                                    <h6 class="notice-title">
+                            @if (isset($typeWise))
+                                @foreach ($typeWise as $fileType => $counts)
+                                    <div class="notice-list">
+                                        <div
+                                            class="post-date
+                             @if ($fileType == 'Normal') bg-yellow
+                             @elseif($fileType == 'Urgent')
+                             bg-blue
+                             @elseif($fileType == 'Immediate')
+                             bg-pink
+                             @elseif($fileType == 'Most Immediate')
+                             bg-red @endif
+                             ">
+                                            {{ $fileType }} <!-- Display the file type -->
+                                        </div>
+                                        <h6 class="notice-title">
 
-                                        <a href="#">
-                                            @foreach ($counts as $flag => $count)
-                                                @if ($count > 0)
-                                                    @if ($flag == 'File')
-                                                        {{ $count }} File(s)
-                                                    @elseif($flag == 'Letter')
-                                                        {{ $count }} Letter(s)
-                                                    @elseif($flag == 'Reply')
-                                                        {{ $count }} Reply(ies)
-                                                    @elseif($flag == 'NoteSheet')
-                                                        {{ $count }} Note Sheet(s)
+                                            <a href="#">
+                                                @foreach ($counts as $flag => $count)
+                                                    @if ($count > 0)
+                                                        @if ($flag == 'File')
+                                                            {{ $count }} File(s)
+                                                        @elseif($flag == 'Letter')
+                                                            {{ $count }} Letter(s)
+                                                        @elseif($flag == 'Reply')
+                                                            {{ $count }} Reply(ies)
+                                                        @elseif($flag == 'NoteSheet')
+                                                            {{ $count }} Note Sheet(s)
+                                                        @endif
                                                     @endif
-                                                @endif
-                                            @endforeach
-                                        </a>
-                                        <!-- Display count and flag status -->
+                                                @endforeach
+                                            </a>
+                                            <!-- Display count and flag status -->
 
-                                    </h6>
-                                </div>
-                            @endforeach
+                                        </h6>
+                                    </div>
+                                @endforeach
+                            @endif
 
 
 
@@ -573,6 +533,110 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-7 col-xl-7 col-7-xxxl">
+                <div class="card dashboard-card-five pd-b-20">
+                    <div class="card-body pd-b-14">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>Status Wises Report</h3>
+                            </div>
+
+                        </div>
+                        <div class="traffic-table table-responsive">
+                            <table class="table" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Total</th>
+                                        <th>Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (isset($typeWise2))
+                                        @foreach ($typeWise2 as $index => $item)
+                                            <tr>
+                                                <td style="width: 60px" class="t-title pseudo-bg-Aquamarine">
+                                                    {{ $index }}</td>
+                                                <td style="width: 60px">{{ $item['Total'] ?? '' }}</td>
+                                                <td colspan="2">
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-warning" role="progressbar"
+                                                            style="width: {{ ($item['In Transit'] / $item['Total']) * 100 }}%"
+                                                            aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">In
+                                                            Transit: {{ ($item['In Transit'] / $item['Total']) * 100 }}%
+                                                        </div>
+                                                        <div class="progress-bar bg-danger" role="progressbar"
+                                                            style="width: {{ ($item['In Process'] / $item['Total']) * 100 }}%"
+                                                            aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">In
+                                                            Process: {{ ($item['In Process'] / $item['Total']) * 100 }}%
+                                                        </div>
+                                                        <div class="progress-bar bg-success" role="progressbar"
+                                                            style="width: {{ ($item['Dispost'] / $item['Total']) * 100 }}%"
+                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                            Completed: {{ ($item['Dispost'] / $item['Total']) * 100 }}%
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-5 col-12">
+                <div class="card dashboard-card-six">
+                    <div class="card-body">
+                        <div class="heading-layout1 mg-b-17">
+                            <div class="item-title">
+                                <h3>Notifications</h3>
+                            </div>
+
+                        </div>
+                        <div class="notice-box-wrap ">
+                            @if (isset($top_10_file))
+                                @foreach ($top_10_file as $item)
+                                    <div class="notice-list">
+
+
+                                        <h6 class="notice-title"><a href="{{ route('track.show', $item->id) }}">
+                                                <u>{{ $item->track_number }} - {{ $item->subject }}</u>
+                                            </a></h6>
+                                        <div class="entry-meta">
+                                            {{ $item->initiatedbysection->name ?? '' }} |
+                                            <span>{{ $item->created_at->format('d-m-Y h:m A') }} | </span>
+
+                                            <div class="post-date 
+                                @if ($item->flag == 'Normal' || $item->flag == null) bg-yellow
+                                @elseif($item->flag == 'Urgent')
+                                bg-blue
+                                @elseif($item->flag == 'Immediate')
+                                bg-pink
+                                @elseif($item->flag == 'Most Immediate')
+                                    bg-red @endif
+                                "
+                                                style=" display: inline-block;
+                                        font-size: 12px;
+                                        color: #ffffff;
+                                        padding: 3px 6px;
+                                        border-radius: 20px;
+                                        margin-bottom: 14px;
+                                    ">
+                                                {{ $item->flag ?? 'Normal' }}</div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
         <!-- Dashboard Content End Here -->
         <!-- Social Media Start Here -->
