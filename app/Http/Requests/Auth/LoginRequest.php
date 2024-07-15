@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -27,6 +28,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
+            // 'g-recaptcha-response' => ['required',  'string'],
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
         ];

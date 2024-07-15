@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use ReCaptcha\ReCaptcha;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -24,11 +26,19 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Verify reCAPTCHA
+        $recaptcha = new ReCaptcha(env('RECAPTCHA_SECRET_KEY'));
+        $response = $recaptcha->verify($request->input('g-recaptcha-response'), $request->ip());
+
+        if (!$response->isSuccess()) {
+            return back()->withErrors(['captcha' => 'Please verify that you are not a robot.']);
+        }
+
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('mydesk', absolute: false));
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
@@ -36,6 +46,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $user = Auth::user();
+        $user->is_otp_verified = false;
+        $user->save();
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

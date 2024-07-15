@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable ;
 
@@ -20,9 +21,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'recovery_email',
+        'profile',
+        'otp',
+        'otp_expiry',
+        'is_otp_verified',
         'password',
         'role',
         'section',
+        'fcm_token',
     ];
 
     /**
@@ -50,4 +57,10 @@ class User extends Authenticatable
     public function sections(){
         return $this->hasOne(Section::class,'id','section');
     }
+
+    public function multiSection()
+    {
+        return $this->belongsToMany(Section::class, AdminSection::class);
+    }
+
 }
